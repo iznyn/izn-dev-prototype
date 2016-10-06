@@ -1,0 +1,22 @@
+{
+  "name": "iznyn-dev-prototype",
+  "authors": [
+    "M Arif Mahthunisnaini <iznyn@yahoo.co.id>"
+  ],
+  "description": "Prototype for developing a website",
+  "main": "",
+  "keywords": [
+    "izn-dev-prototype"
+  ],
+  "license": "MIT",
+  "homepage": "http://iznyn.io",
+  "private": true,
+  "dependencies": {
+    "compass-mixins": "^1.0.2",
+    "bootstrap-sass": "^3.3.7",
+    "font-awesome": "^4.6.3",
+    "jquery": "^3.1.0"
+  },
+  "devDependencies": {
+  }
+}
