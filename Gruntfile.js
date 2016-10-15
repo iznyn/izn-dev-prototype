@@ -11,6 +11,7 @@ module.exports = function(grunt) {
       assets: 'resources/assets/',
       public: 'public/',
       pug_cwd: 'resources/views/',
+      pug_files: '**/*.pug',
       pug_dest: 'public/',
       doc: 'doc/'
     },
@@ -141,7 +142,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= meta.pug_cwd %>',
-          src: ['**/*.pug', '!blocks/**', '!layouts/**', '!mixins/**'],
+          src: ['<%= meta.pug_files %>', '!blocks/**', '!layouts/**', '!mixins/**'],
           dest: '<%= meta.pug_dest %>',
           ext: '.html'
         }]
@@ -175,6 +176,14 @@ module.exports = function(grunt) {
           cwd: '<%= meta.assets %>media/',
           src: '**',
           dest: '<%= meta.public %>media/'
+        }]
+      },
+      html: {
+        files: [{
+          expand: true,
+          cwd: '<%= meta.views %>',
+          src: '**/*.html',
+          dest: '<%= meta.public %>'
         }]
       }
     },
@@ -219,11 +228,17 @@ module.exports = function(grunt) {
         ],
         tasks: ['concat:js_basic','concat:js_general']
       },
-      html: {
+      pug: {
         files: [
           '<%= meta.views %>/**/*.pug'
         ],
         tasks: ['puglint','pug']
+      },
+      html: {
+        files: [
+          '<%= meta.views %>/**/*.html'
+        ],
+        tasks: ['copy:html']
       },
       fonts: {
         files: [
@@ -274,14 +289,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:dev', 
-    'sass', 
-    'concat:css_general', 
-    'postcss', 
     'pug', 
-    'puglint', 
-    'concat:bower_libs',
-    'concat:js_basic', 
-    'concat:js_general',
+    'puglint',
     'copy'
   ]);
   grunt.registerTask('build_adv', [
